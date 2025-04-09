@@ -8,7 +8,15 @@ exports.crearFactura = async (req, res) => {
     for (const detalle of detalles) {
       await DetalleFactura.create({ ...detalle, facturaId: factura.id });
     }
-    res.status(201).json({ message: 'Factura creada', factura });
+    const facturaConDetalles = await Factura.findOne({
+      where: { id: factura.id },
+      include: DetalleFactura
+    });
+
+    res.status(201).json({
+      message: 'Factura creada',
+      factura: facturaConDetalles
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

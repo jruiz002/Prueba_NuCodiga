@@ -57,6 +57,7 @@
           <h5>Factura: {{ facturaBuscada.numero }}</h5>
           <p>Cliente: {{ facturaBuscada.cliente }}</p>
           <p>Fecha: {{ facturaBuscada.fecha }}</p>
+          <p>Total: Q {{ facturaBuscada.total }}</p>
           <ul>
             <li v-for="(d, i) in facturaBuscada.DetalleFacturas" :key="i">
               {{ d.descripcion }} - {{ d.cantidad }} x Q{{ d.precio }}

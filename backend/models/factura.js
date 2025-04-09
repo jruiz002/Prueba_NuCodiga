@@ -14,6 +14,18 @@ const Factura = sequelize.define('Factura', {
   cliente: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  total: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      let total = 0;
+      if (this.DetalleFacturas) {
+        this.DetalleFacturas.forEach(detalle => {
+          total += detalle.cantidad * detalle.precio;
+        });
+      }
+      return total;
+    }
   }
 });
 
